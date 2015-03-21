@@ -398,11 +398,11 @@ namespace USBDevices
 		{
 			var emdDevices = new List<EmdMgmtDevice>();
 
-			var registryHive = new RegistryHive(softwareRegistryFilePath);
+			var registryHive = new RegistryHiveOnDemand(softwareRegistryFilePath);
 
 			const string keyname = @"Microsoft\Windows NT\CurrentVersion\EMDMgmt";
 
-			var key = registryHive.FindKey(keyname);
+			var key = registryHive.GetKey(keyname);
 
 			foreach (var v in key.SubKeys)
 			{
@@ -441,11 +441,11 @@ namespace USBDevices
 		{
 			var portableDevs = new List<PortableMappedDevice>();
 
-			var registryHive = new RegistryHive(softwareRegistryFilePath);
+			var registryHive = new RegistryHiveOnDemand(softwareRegistryFilePath);
 
 			const string keyname = @"Microsoft\Windows Portable Devices\Devices";
 
-			var key = registryHive.FindKey(keyname);
+			var key = registryHive.GetKey(keyname);
 
 			foreach (var v in key.SubKeys)
 			{
@@ -600,13 +600,13 @@ namespace USBDevices
 			return TimeZoneInfo.FindSystemTimeZoneById(tzname);
 		}
 
-		private WinVerEnum GetWindowsVersion(string regFilePath)
+		private WinVerEnum GetWindowsVersion(string softwareHivePath)
 		{
-			var registryHive = new RegistryHive(regFilePath);
+			var registryHive = new RegistryHiveOnDemand(softwareHivePath);
 
 			const string keyname = @"Microsoft\Windows NT\CurrentVersion";
 
-			var key = registryHive.FindKey(keyname);
+			var key = registryHive.GetKey(keyname);
 
 			var productName = key.Values.Single(t => t.ValueName == "ProductName").ValueData;
 

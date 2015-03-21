@@ -39,7 +39,8 @@ namespace USBDevices.Classes
 				line = sr.ReadLine();
 				while (line != null)
 				{
-					if (line.Contains("USBSTOR#Disk"))
+					var templine = line.ToLowerInvariant();
+					if (templine.Contains("usbstor#disk") && line.StartsWith(">>>"))
 					{
 						var parentLine = line;
 						//>>>  [Device Install (Hardware initiated) - SWD\WPDBUSENUM\_??_USBSTOR#Disk&Ven_USB2.0&Prod_Flash_Disk&Rev_2.10#1000000000001C37&0#{53f56307-b6bf-11d0-94f2-00a0c91efb8b}]
