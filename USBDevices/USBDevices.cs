@@ -13,18 +13,18 @@ namespace USBDevices
 	//http://www.forensicswiki.org/wiki/USB_History_Viewing
 
 
-	public class USBDevices
+	public class UsbDevices
 	{
 		public enum WinVerEnum
 		{
-			WindowsXP,
+			WindowsXp,
 			WindowsVista,
 			Windows7,
 			Windows8,
 			Unsupported
 		}
 
-		public USBDevices(string systemRegistryFilePath, string softwareRegistryFilePath, string setupAPIDevLogPath,
+		public UsbDevices(string systemRegistryFilePath, string softwareRegistryFilePath, string setupApiDevLogPath,
 			List<string> ntUserFilePaths)
 		{
 			WindowsVersion = GetWindowsVersion(softwareRegistryFilePath);
@@ -34,7 +34,6 @@ namespace USBDevices
 			var mountedDevices = GetMountedDevices(systemRegistryFilePath);
 			var windowsPortableDevices = GetWindowsPortableDevices(softwareRegistryFilePath);
 			var emdMgmtDevices = GetEmdMgmtList(softwareRegistryFilePath);
-			var setupAPIRecords = GetSetupAPIInfo(setupAPIDevLogPath, TimeZone);
 
 			var storageClasses = GetStorageClassesDevices(systemRegistryFilePath);
 
@@ -47,16 +46,13 @@ namespace USBDevices
 
 				foreach (var mountPoint2Device in mountPoint2Devices)
 				{
-					var mp2d = mountPoint2Device;
+					var mp2Device = mountPoint2Device;
 					var mountedDev =
 						mountedDevices.Volumes.SingleOrDefault(
-							y => y.GUID.ToLowerInvariant() == mp2d.Guid.ToLowerInvariant());
+							y => y.GUID.ToLowerInvariant() == mp2Device.Guid.ToLowerInvariant());
 
-					if (mountedDev != null)
-					{
-						mountedDev.UsersWhoMountedDevice.Add(new Tuple<string, DateTimeOffset>(profileName,
-							mp2d.LastWriteTime));
-					}
+					mountedDev?.UsersWhoMountedDevice.Add(new Tuple<string, DateTimeOffset>(profileName,
+						mp2Device.LastWriteTime));
 				}
 
 				ntusers.Add(new Tuple<string, List<MountPoint2Device>>(profileName, mountPoint2Devices));
@@ -65,17 +61,19 @@ namespace USBDevices
 
 			USBDeviceList = GetUSBDeviceList(systemRegistryFilePath);
 
+			var setupApiRecords = new SetUpApiDevLog(setupApiDevLogPath,TimeZone);
+
 			foreach (var usbDevice in USBDeviceList)
 			{
 				var device = usbDevice;
 
 				var setupApiDevRecord =
-					setupAPIRecords.SingleOrDefault(
+					setupApiRecords.SetUpApiRecords.SingleOrDefault(
 						y => y.SerialNumber.ToLowerInvariant() == usbDevice.SerialNumber.ToLowerInvariant());
 
 				if (setupApiDevRecord != null)
 				{
-					usbDevice.FirstDateTimeConnectedSetupAPI = setupApiDevRecord.FirstConnectedDatetime;
+					usbDevice.FirstDateTimeConnectedSetupApi = setupApiDevRecord.FirstConnectedDatetime;
 				}
 
 
@@ -85,8 +83,8 @@ namespace USBDevices
 
 				if (enumRecord != null)
 				{
-					usbDevice.VendorID = enumRecord.VID_ID;
-					usbDevice.ProductID = enumRecord.PID_ID;
+					usbDevice.VendorId = enumRecord.VID_ID;
+					usbDevice.ProductId = enumRecord.PID_ID;
 					usbDevice.VendorNameFromID = enumRecord.ProductInfo.VendorName;
 					usbDevice.ProductNameFromID = enumRecord.ProductInfo.ProductDescription;
 				}
@@ -344,7 +342,7 @@ namespace USBDevices
 					Vendor = segs[1].Substring(4),
 					Product = segs[2].Substring(5),
 					Revision = segs[3].Substring(4),
-					USBStorTimestamp = k.LastWriteTime.Value
+					UsbStorKeyLastWriteTime = k.LastWriteTime.Value
 				};
 
 
@@ -394,50 +392,7 @@ namespace USBDevices
 			return devList;
 		}
 
-		private List<SetupAPIDevRecord> GetSetupAPIInfo(string setupAPIDevLogPath, TimeZoneInfo timeZoneInfo)
-		{
-			var setupDevs = new List<SetupAPIDevRecord>();
-
-
-			using (var sr = new StreamReader(setupAPIDevLogPath))
-			{
-				string line = null;
-
-				line = sr.ReadLine();
-				while (line != null)
-				{
-					if (line.Contains("USBSTOR#Disk"))
-					{
-						var parentLine = line;
-						//>>>  [Device Install (Hardware initiated) - SWD\WPDBUSENUM\_??_USBSTOR#Disk&Ven_USB2.0&Prod_Flash_Disk&Rev_2.10#1000000000001C37&0#{53f56307-b6bf-11d0-94f2-00a0c91efb8b}]
-						//>>>  Section start 2013/10/17 17:06:15.883
-
-						var segs = parentLine.Split('&');
-						var segs2 = segs[3].Split('#');
-
-						var serial = segs2[1];
-
-						var timeStampLine = sr.ReadLine();
-						var tsDate = DateTime.Parse(timeStampLine.Replace(">>>  Section start ", ""));
-
-						var ts = new DateTimeOffset(tsDate, timeZoneInfo.GetUtcOffset(tsDate));
-
-						var sar = new SetupAPIDevRecord
-						{
-							FirstConnectedDatetime = ts.ToUniversalTime(),
-							SerialNumber = serial
-						};
-
-						setupDevs.Add(sar);
-					}
-
-					line = sr.ReadLine();
-				}
-			}
-
-
-			return setupDevs;
-		}
+		
 
 		private List<EmdMgmtDevice> GetEmdMgmtList(string softwareRegistryFilePath)
 		{
@@ -657,7 +612,7 @@ namespace USBDevices
 
 			if (productName.Contains("XP"))
 			{
-				return WinVerEnum.WindowsXP;
+				return WinVerEnum.WindowsXp;
 			}
 
 			if (productName.Contains("Vista"))

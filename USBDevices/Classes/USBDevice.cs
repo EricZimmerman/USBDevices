@@ -23,8 +23,8 @@ namespace USBDevices
 		public string Type { get; set; }
 		public string Vendor { get; set; }
 		public string Product { get; set; }
-		public int VendorID { get; set; }
-		public int ProductID { get; set; }
+		public int VendorId { get; set; }
+		public int ProductId { get; set; }
 		public string ProductNameFromID { get; set; }
 		public string VendorNameFromID { get; set; }
 		public string FriendlyName { get; set; }
@@ -32,12 +32,12 @@ namespace USBDevices
 		public List<Tuple<string, uint, string>> Volumes { get; set; }
 		public List<Tuple<string, DateTimeOffset>> UsersWhoMountedDevice { get; set; }
 		public string Revision { get; set; }
-		public DateTimeOffset USBStorTimestamp { get; set; }
+		public DateTimeOffset UsbStorKeyLastWriteTime { get; set; }
 		public string SerialNumber { get; set; }
 		public DateTimeOffset? FirstDateTimeConnected0064 { get; set; }
 		public DateTimeOffset? LastDateTimeConnected0066 { get; set; }
 		public DateTimeOffset? LastDateTimeRemoved0067 { get; set; }
 		public DateTimeOffset? FirstDateTimeConnectedStorageClass { get; set; }
-		public DateTimeOffset? FirstDateTimeConnectedSetupAPI { get; set; }
+		public DateTimeOffset? FirstDateTimeConnectedSetupApi { get; set; }
 	}
 }
