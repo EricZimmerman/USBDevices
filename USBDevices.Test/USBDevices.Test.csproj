@@ -32,11 +32,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="NFluent, Version=1.3.1.0, Culture=neutral, PublicKeyToken=18828b37b84b1437, processorArchitecture=MSIL">
-      <HintPath>..\RegistryUSBDevices\packages\NFluent.1.3.1\lib\net40\NFluent.dll</HintPath>
+      <HintPath>..\packages\NFluent.1.3.1\lib\net40\NFluent.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <HintPath>..\RegistryUSBDevices\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
+      <HintPath>..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -48,12 +48,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SetUpApiDevLogTest.cs" />
+    <Compile Include="Win7Tests.cs" />
     <Compile Include="VendorLookupTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Hives\setupapi.dev.log" />
+    <None Include="Hives\Win7\NTUSER.DAT" />
+    <None Include="Hives\Win7\setupapi.dev.log" />
+    <None Include="Hives\Win7\SOFTWARE" />
+    <None Include="Hives\Win7\SYSTEM" />
+    <None Include="Hives\Win7\UsrClass.dat" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -62,7 +67,10 @@
       <Name>USBDevices</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Hives\Win10\" />
+    <Folder Include="Hives\Win81\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

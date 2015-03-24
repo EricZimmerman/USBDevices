@@ -1,1 +1,19 @@
 ﻿- Get rid of Tuples
+- HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\DeviceClasses\{10497b1b-ba51-44e5-8318-a65c837b6661} ??
+- HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\DeviceClasses\{6ac27878-a6fa-4155-ba85-f98f491d4f33} ??
+- HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\DeviceClasses\{7f108a28-9833-4b3b-b780-2c6b5fa5c062} ??
+- HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\DeviceClasses\{7fccc86c-228a-40ad-8a58-f590af7bfdce} ??
+- HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\DeviceClasses\{f33fdc04-d1ac-4e8e-9a30-19bbd4b108ae} ??
+- HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Control\DeviceContainers\{4fc2e73a-087a-5437-ba9c-8322f186d2ab}\BaseContainers\{4fc2e73a-087a-5437-ba9c-8322f186d2ab} ??
+- HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Enum\STORAGE\Volume ??
+- HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Enum\SWD\WPDBUSENUM
+
+
+
+
+
+
+
+
+
+

@@ -8,16 +8,16 @@ using System.Runtime.CompilerServices;
 
 namespace USBDevices.Classes
 {
-	internal class VendorInformation
-	{
-		public VendorInformation(int vendorId, string vendorName)
-		{
-			VendorId = vendorId;
-			VendorName = vendorName;
-		}
+    internal class VendorInformation
+    {
+        public VendorInformation(int vendorId, string vendorName)
+        {
+            VendorId = vendorId;
+            VendorName = vendorName;
+        }
 
-		public string VendorName { get; }
-		public int VendorId { get; }
-		public Dictionary<int, string> ProductInformation { get; } = new Dictionary<int, string>();
-	}
+        public string VendorName { get; }
+        public int VendorId { get; }
+        public Dictionary<int, string> ProductInformation { get; } = new Dictionary<int, string>();
+    }
 }

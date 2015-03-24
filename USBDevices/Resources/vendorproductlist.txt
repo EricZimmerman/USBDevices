@@ -8751,6 +8751,7 @@
 	5576  Cruzer Facet
 	5580  SDCZ80 Flash Drive
 	5581  Ultra
+	5588  ExtremePro Flash Drive
 	5e10  Encrypted
 	6100  Ultra II SD Plus 2GB
 	7100  Cruzer Mini
@@ -14143,6 +14144,7 @@
 	c93a  4GB Pen Drive
 	c96a  C906 Flash Drive
 	cb10  Dash Drive UV100
+	de7a  UE700 Flash drive
 1260  Standard Microsystems Corp.
 	ee22  SMC2862W-G v3 EZ Connect 802.11g Adapter [Intersil ISL3887]
 1264  Covidien Energy-based Devices

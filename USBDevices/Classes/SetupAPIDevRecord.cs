@@ -2,9 +2,9 @@
 
 namespace USBDevices
 {
-	internal class SetupAPIDevRecord
-	{
-		public DateTimeOffset FirstConnectedDatetime { get; set; }
-		public string SerialNumber { get; set; }
-	}
+    internal class SetupAPIDevRecord
+    {
+        public DateTimeOffset FirstConnectedDatetime { get; set; }
+        public string SerialNumber { get; set; }
+    }
 }

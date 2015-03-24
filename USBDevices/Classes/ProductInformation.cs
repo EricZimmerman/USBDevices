@@ -1,15 +1,21 @@
 ﻿using System.Runtime.CompilerServices;
-
-#if DEBUG
-
-[assembly: InternalsVisibleTo("USBDevices.Test")]
-#endif
+using System.Text;
 
 namespace USBDevices.Classes
 {
-	internal class ProductInformation
-	{
-		public string VendorName { get; set; } = "Unknown";
-		public string ProductDescription { get; set; } = "Unknown";
-	}
+    public class ProductInformation
+    {
+        public string VendorName { get; set; } = "Unknown";
+        public string ProductDescription { get; set; } = "Unknown";
+
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+
+            sb.AppendLine($"Vendor name: {VendorName}");
+            sb.AppendLine($"Product description: {ProductDescription}");
+
+            return sb.ToString();
+        }
+    }
 }
